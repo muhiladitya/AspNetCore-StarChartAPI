@@ -25,7 +25,7 @@ namespace StarChart.Controllers
             {
                 return NotFound();
             }
-            newobj.Satellites = (List<Models.CelestialObject>)_context.CelestialObjects.Where(c => c.OrbitedObjectId == id);
+            newobj.Satellites = _context.CelestialObjects.Where(c => c.OrbitedObjectId == id).ToList();
 
             return Ok(newobj);
 
@@ -40,7 +40,7 @@ namespace StarChart.Controllers
             }
 
             foreach(var newobjs in newobj)
-            { newobjs.Satellites = (List<Models.CelestialObject>)_context.CelestialObjects.Where(c => c.OrbitedObjectId == newobjs.Id).ToList(); }
+            { newobjs.Satellites = _context.CelestialObjects.Where(c => c.OrbitedObjectId == newobjs.Id).ToList(); }
 
             return Ok(newobj);
 
@@ -54,7 +54,7 @@ namespace StarChart.Controllers
             }
 
             foreach (var newobjs in newobj)
-            { newobjs.Satellites = (List<Models.CelestialObject>)_context.CelestialObjects.Where(c => c.OrbitedObjectId == newobjs.Id); }
+            { newobjs.Satellites = _context.CelestialObjects.Where(c => c.OrbitedObjectId == newobjs.Id).ToList(); }
 
             return Ok(newobj);
         }
